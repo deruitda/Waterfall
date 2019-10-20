@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.Networking;
 public class PlayerUnit : NetworkBehaviour
 {
+    public Camera PlayerCam;
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
