@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     private float _speed = 5f;
     private PlayerMotor _motor;
 
+    [SerializeField]
+    private float _lookSens = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,5 +31,19 @@ public class PlayerController : MonoBehaviour
 
         //apply transoform
         _motor.SetVelocity(velocity);
+
+        //get horiz mouse rotation (looking around)
+        float yRot = Input.GetAxisRaw("Mouse X");
+
+        Vector3 rotation = new Vector3(0f, yRot, 0f) * _lookSens;
+
+        _motor.SetRotation(rotation);
+
+        //get vert mouse rotation (camera roatation up and down)
+        float xRot = Input.GetAxisRaw("Mouse Y");
+
+        Vector3 cameraRotation = new Vector3(xRot, 0f, 0f) * _lookSens;
+
+        _motor.SetCameraRotation(cameraRotation);
     }
 }
