@@ -60,7 +60,6 @@ public class PlayerMotor : MonoBehaviour
         //rotate camera up and down
         if (_cam != null && _cameraRot != Vector3.zero)
         {
-            Debug.Log("CameraRot: " + (-_cameraRot).ToString());
             _cam.transform.Rotate(-_cameraRot);
         }
     }
