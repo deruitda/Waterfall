@@ -46,4 +46,14 @@ public class PlayerController : MonoBehaviour
 
         _motor.SetCameraRotation(cameraRotation);
     }
+
+    private void FixedUpdate()
+    {
+        RaycastHit hit;
+        Debug.DrawRay(transform.position, transform.forward, Color.red);
+        if(Physics.Raycast(this.transform.position, transform.forward, out hit, 10f))
+        {
+            Debug.Log("Touching card");
+        }
+    }
 }
