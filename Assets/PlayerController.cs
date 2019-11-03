@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _lookSens = 5f;
 
+    public float _gazeDistance = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +53,12 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit hit;
         Debug.DrawRay(transform.position, transform.forward, Color.red);
-        if(Physics.Raycast(this.transform.position, transform.forward, out hit, 10f))
+
+        //if the player presses E, and hits a playing card with their gaze
+        if (Input.GetKeyUp(KeyCode.E)
+            && Physics.Raycast(this.transform.position, transform.forward, out hit, 10f)
+            && hit.distance < _gazeDistance
+            && hit.collider.gameObject.CompareTag("PlayingCard"))
         {
             Debug.Log("Touching card");
         }
