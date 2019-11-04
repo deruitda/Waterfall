@@ -60,7 +60,10 @@ public class PlayerController : MonoBehaviour
             && hit.distance < _gazeDistance
             && hit.collider.gameObject.CompareTag("PlayingCard"))
         {
-            Debug.Log("Touching card");
+            GameObject cardGO = hit.collider.gameObject;
+
+            PlayingCard card = cardGO.GetComponent<PlayingCard>();
+            card.Select();
         }
     }
 }

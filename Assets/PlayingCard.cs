@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class PlayingCard : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Material _mat;
 
-    // Update is called once per frame
-    void Update()
+    public void Select()
     {
-        
+        if(_mat == null)
+        {
+            Debug.Log("Card material is empty");
+            return;
+        }
+
+        _mat.color = Color.blue;
     }
 }
