@@ -23,6 +23,6 @@ public class GameMaster : MonoBehaviour
         int index = Random.Range(0, availableMats.Count - 1);
         Material mat = availableMats[index];
         availableMats.Remove(mat);
-        return availableMats[index];
+        return mat;
     }
 }

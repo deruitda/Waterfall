@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class PlayingCard : MonoBehaviour
 {
-    public Material _mat;
+    public MeshRenderer _meshRenderer;
+    public GameMaster _gm;
 
     public void Select()
     {
-        if(_mat == null)
+        if(_meshRenderer == null)
         {
-            Debug.Log("Card material is empty");
+            Debug.Log("Card renderer is empty");
             return;
         }
 
-        _mat.color = Color.blue;
+        _meshRenderer.material = _gm.GetMat();
     }
 }
