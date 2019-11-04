@@ -18,9 +18,8 @@ public class GameMaster : MonoBehaviour
         
     }
 
-    public Material GetMat()
+    public Material GetMat(int index)
     {
-        int index = Random.Range(0, availableMats.Count - 1);
         Material mat = availableMats[index];
         availableMats.Remove(mat);
         return mat;
