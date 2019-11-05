@@ -9,6 +9,7 @@ public class PlayingCard : NetworkBehaviour
     public MeshRenderer _meshRenderer;
     private Material _newMat;
     public GameMaster _gm;
+    public BuschLiteCan _can;
 
     public void Select()
     {
@@ -19,6 +20,7 @@ public class PlayingCard : NetworkBehaviour
         }
 
         _gm.SelectCard(this);
+        _can.placeCard();
     }
 
     [ClientRpc]
