@@ -13,12 +13,6 @@ public class PlayingCard : NetworkBehaviour
 
     public void Select()
     {
-        if(_meshRenderer == null)
-        {
-            Debug.Log("Card renderer is empty");
-            return;
-        }
-
         _gm.SelectCard(this);
         _can.placeCard();
     }
