@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 public class PlayingCard : NetworkBehaviour
 {
     public MeshRenderer _meshRenderer;
+    private Material _newMat;
     public GameMaster _gm;
 
     public void Select()
@@ -17,18 +18,11 @@ public class PlayingCard : NetworkBehaviour
             return;
         }
 
-        CmdSetMaterial();
-    }
-
-    [Command]
-    private void CmdSetMaterial()
-    {
-        int rand = UnityEngine.Random.Range(0, _gm.availableMats.Count - 1);
-        RpcSetMaterial(rand);
+        _gm.SelectCard(this);
     }
 
     [ClientRpc]
-    private void RpcSetMaterial(int rand)
+    public void RpcSetMaterial(int rand)
     {
         _meshRenderer.material = _gm.GetMat(rand);
     }

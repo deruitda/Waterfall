@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(PlayerMotor))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     [SerializeField]
     private float _speed = 5f;
@@ -11,11 +12,13 @@ public class PlayerController : MonoBehaviour
     private float _lookSens = 5f;
 
     public float _gazeDistance = 5f;
+    public PlayingCard _currSelectedCard;
 
     // Start is called before the first frame update
     void Start()
     {
         _motor = GetComponent<PlayerMotor>();
+        _currSelectedCard = GameObject.FindGameObjectWithTag("PlayingCard").GetComponent<PlayingCard>();//TODO: fix this to work with multiple cards cardGO.GetComponent<PlayingCard>();
     }
 
     // Update is called once per frame
@@ -62,8 +65,13 @@ public class PlayerController : MonoBehaviour
         {
             GameObject cardGO = hit.collider.gameObject;
 
-            PlayingCard card = cardGO.GetComponent<PlayingCard>();
-            card.Select();
+            CmdSelectCard();
         }
+    }
+
+    [Command]
+    private void CmdSelectCard()
+    {
+        _currSelectedCard.Select();
     }
 }

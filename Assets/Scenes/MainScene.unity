@@ -385,6 +385,7 @@ GameObject:
   - component: {fileID: 259842938}
   - component: {fileID: 259842937}
   - component: {fileID: 259842940}
+  - component: {fileID: 259842941}
   m_Layer: 0
   m_Name: Card Model
   m_TagString: PlayingCard
@@ -479,6 +480,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 259842938}
   _gm: {fileID: 1363045139}
+--- !u!114 &259842941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259842935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!1 &412453792
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,6 +1174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1363045140}
   - component: {fileID: 1363045139}
+  - component: {fileID: 1363045141}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -1212,6 +1247,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 5cc5d2698d2b2044aa72ca392bad3578, type: 2}
   - {fileID: 2100000, guid: 4ab20250de733e842b9f85ebd2bdc1f7, type: 2}
   - {fileID: 2100000, guid: 4fda78aa9a04e7c43aa9aa2d3a52792d, type: 2}
+  _currentSelectedCard: {fileID: 0}
 --- !u!4 &1363045140
 Transform:
   m_ObjectHideFlags: 0
@@ -1226,6 +1262,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1363045141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363045138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!1 &1966850561
 GameObject:
   m_ObjectHideFlags: 0
