@@ -36,7 +36,7 @@ public class BuschLiteCan : MonoBehaviour
             return false;
         }
 
-        double chanceOfCracking = 75 * (1 - System.Math.Exp(-0.1 * (cardsUnderTab - minCardsUnderTab))) + 25;
+        double chanceOfCracking = 95 * (1 - System.Math.Exp(-0.05 * (cardsUnderTab - minCardsUnderTab))) + 5;
         double rand = Random.Range(0, 100);
 
         Debug.Log("Chance (" + chanceOfCracking + ") > Random (" + rand + ")?");
