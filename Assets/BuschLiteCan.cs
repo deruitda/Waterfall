@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class BuschLiteCan : MonoBehaviour
+public class BuschLiteCan : NetworkBehaviour
 {
     private int cardsUnderTab = 0;
     public int minCardsUnderTab = 15;
