@@ -14,7 +14,6 @@ public class PlayingCard : NetworkBehaviour
     public void Select()
     {
         _gm.SelectCard(this);
-        _can.placeCard();
     }
 
     [ClientRpc]
