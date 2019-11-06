@@ -1,10 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BuschLiteCan : MonoBehaviour
 {
-    private int clicks = 0;
+    private int cardsUnderTab = 0;
+    public int minCardsUnderTab = 15;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,28 @@ public class BuschLiteCan : MonoBehaviour
 
     public void placeCard()
     {
-        clicks++;
-        Debug.Log($"Clicks: {clicks}");
+        cardsUnderTab++;
+        Debug.Log("Cards under tab: "+cardsUnderTab);
+        
+        if (canCracked())
+        {
+            Debug.Log("Can Cracked Bitch");
+        }
+    }
+
+    private bool canCracked()
+    {
+        if (cardsUnderTab < minCardsUnderTab)
+        {
+            return false;
+        }
+
+        double chanceOfCracking = 75 * (1 - System.Math.Exp(-0.1 * (cardsUnderTab - minCardsUnderTab))) + 25;
+        double rand = Random.Range(0, 100);
+
+        Debug.Log("Chance (" + chanceOfCracking + ") > Random (" + rand + ")?");
+
+        // If the chance of cracking the can beats the random number (0-100), the can cracks
+        return (chanceOfCracking > rand);
     }
 }
