@@ -24,7 +24,7 @@ public class BuschLiteCan : NetworkBehaviour
         cardsUnderTab++;
         Debug.Log("Cards under tab: "+cardsUnderTab);
         
-        if (CanCracked())
+        if (IsCanCracked())
         {
             Debug.Log("Can cracked, bitch. Let's get a new can.");
             NewCan();
@@ -36,7 +36,7 @@ public class BuschLiteCan : NetworkBehaviour
         cardsUnderTab = 0;
     }
 
-    private bool CanCracked()
+    private bool IsCanCracked()
     {
         if (cardsUnderTab < minCardsUnderTab)
         {

@@ -1128,7 +1128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 259842938}
   _gm: {fileID: 1363045139}
-  _can: {fileID: 0}
+  _can: {fileID: 599004368}
 --- !u!114 &259842941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3895,7 +3895,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 5cc5d2698d2b2044aa72ca392bad3578, type: 2}
   - {fileID: 2100000, guid: 4ab20250de733e842b9f85ebd2bdc1f7, type: 2}
   - {fileID: 2100000, guid: 4fda78aa9a04e7c43aa9aa2d3a52792d, type: 2}
+  playingMats: []
   _currentSelectedCard: {fileID: 0}
+  _can: {fileID: 599004368}
 --- !u!4 &1363045140
 Transform:
   m_ObjectHideFlags: 0

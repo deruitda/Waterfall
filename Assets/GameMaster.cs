@@ -13,7 +13,7 @@ public class GameMaster : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playingMats = availableMats; //< TODO: Need to clone, not set equal to
+        CopyCards(); //< TODO: Need to clone, not set equal to
     }
 
     // Update is called once per frame
@@ -25,9 +25,8 @@ public class GameMaster : NetworkBehaviour
     public void NewGame()
     {
         Debug.Log("New game started!");
-        playingMats = availableMats;
+        CopyCards();
         _can.NewCan();
-        Debug.Log("Cards: " + playingMats.Count);
     }
 
     public void SelectCard(PlayingCard card)
@@ -44,7 +43,6 @@ public class GameMaster : NetworkBehaviour
     {
         playingMats.RemoveAt(index);
         _can.placeCard();
-        Debug.Log(playingMats.Count);
 
         if (playingMats.Count <= 0)
         {
@@ -57,5 +55,13 @@ public class GameMaster : NetworkBehaviour
     {
         Material mat = playingMats[index];
         return mat;
+    }
+
+    private void CopyCards()
+    {
+        for (int i = 0; i < availableMats.Count; i++)
+        {
+            playingMats.Add(availableMats[i]);
+        }
     }
 }
