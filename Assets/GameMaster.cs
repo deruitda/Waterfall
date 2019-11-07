@@ -44,6 +44,11 @@ public class GameMaster : NetworkBehaviour
         playingMats.RemoveAt(index);
         _can.placeCard();
 
+        if (playingMats.Count == 1)
+        {
+            Debug.Log("Last card of the deck");
+        }
+
         if (playingMats.Count <= 0)
         {
             Debug.Log("Last card has been drawn. Drawing another card will start a new game."); //< TODO: replace with New Game interface
