@@ -6,6 +6,7 @@ public class BuschLiteCan : NetworkBehaviour
 {
     private int cardsUnderTab = 0;
     public int minCardsUnderTab = 15;
+    public GameObject _explosionPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,9 @@ public class BuschLiteCan : NetworkBehaviour
         if (IsCanCracked())
         {
             Debug.Log("Can cracked, bitch. Let's get a new can.");
+            ExplosionEffect explosionEffect = _explosionPrefab.GetComponent<ExplosionEffect>();
+            explosionEffect.Explode();
+            //Destroy(_explosionPrefab);
             NewCan();
         }
     }
@@ -34,6 +38,7 @@ public class BuschLiteCan : NetworkBehaviour
     public void NewCan()
     {
         cardsUnderTab = 0;
+        Instantiate(_explosionPrefab, this.transform.position, this.transform.rotation);
     }
 
     private bool IsCanCracked()
