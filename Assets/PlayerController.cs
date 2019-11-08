@@ -50,18 +50,14 @@ public class PlayerController : NetworkBehaviour
         Vector3 cameraRotation = new Vector3(xRot, 0f, 0f) * _lookSens;
 
         _motor.SetCameraRotation(cameraRotation);
-    }
-
-    private void FixedUpdate()
-    {
-        RaycastHit hit;
-        Debug.DrawRay(transform.position, transform.forward, Color.red);
 
         //if the player presses E, and hits a playing card with their gaze
+        RaycastHit hit;
+        Debug.DrawRay(transform.position, transform.forward, Color.red);
         if (Input.GetKeyUp(KeyCode.E)
             && Physics.Raycast(this.transform.position, transform.forward, out hit, 10f)
-            && hit.distance < _gazeDistance
-            && hit.collider.gameObject.CompareTag("PlayingCard"))
+            && hit.collider.gameObject.CompareTag("PlayingCard")
+            && hit.distance < _gazeDistance)
         {
             GameObject cardGO = hit.collider.gameObject;
 

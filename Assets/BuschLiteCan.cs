@@ -24,13 +24,19 @@ public class BuschLiteCan : NetworkBehaviour
         cardsUnderTab++;
         Debug.Log("Cards under tab: "+cardsUnderTab);
         
-        if (canCracked())
+        if (IsCanCracked())
         {
-            Debug.Log("Can Cracked Bitch");
+            Debug.Log("Can cracked, bitch. Let's get a new can.");
+            NewCan();
         }
     }
 
-    private bool canCracked()
+    public void NewCan()
+    {
+        cardsUnderTab = 0;
+    }
+
+    private bool IsCanCracked()
     {
         if (cardsUnderTab < minCardsUnderTab)
         {
@@ -40,7 +46,7 @@ public class BuschLiteCan : NetworkBehaviour
         double chanceOfCracking = 95 * (1 - System.Math.Exp(-0.05 * (cardsUnderTab - minCardsUnderTab))) + 5;
         double rand = Random.Range(0, 100);
 
-        Debug.Log("Chance (" + chanceOfCracking + ") > Random (" + rand + ")?");
+        // Debug.Log("Chance (" + chanceOfCracking + ") > Random (" + rand + ")?");
 
         // If the chance of cracking the can beats the random number (0-100), the can cracks
         return (chanceOfCracking > rand);
