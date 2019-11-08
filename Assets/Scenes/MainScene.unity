@@ -2203,7 +2203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f97758efc741542bc3826b98cd974a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minCardsUnderTab: 1
+  minCardsUnderTab: 15
   _explosionPrefab: {fileID: 1007166384}
 --- !u!4 &599004372 stripped
 Transform:
