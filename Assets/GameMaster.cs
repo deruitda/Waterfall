@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -9,6 +10,10 @@ public class GameMaster : NetworkBehaviour
     public List<Material> playingMats; //< Used in the game, reset with availableMats
     public PlayingCard _currentSelectedCard;
     public BuschLiteCan _can;
+    public CustomNetworkManager _networkManager;
+    [SyncVar]
+    private int _currentTurn;
+    public int CurrentTurn { get { return _currentTurn; } private set { _currentTurn = value; } }
 
     // Start is called before the first frame update
     void Start()
@@ -29,13 +34,33 @@ public class GameMaster : NetworkBehaviour
         _can.NewCan();
     }
 
-    public void SelectCard(PlayingCard card)
+    public void SelectCard(PlayingCard card, int turnNumber)
     {
+        //if it's not the callers turn, return
+        if (turnNumber != CurrentTurn)
+        {
+            Debug.Log($"It's not player {turnNumber}'s turn!");
+            return;
+        }
+
         _currentSelectedCard = card;
-        int rand = Random.Range(0, playingMats.Count - 1);
+        int rand = UnityEngine.Random.Range(0, playingMats.Count - 1);
 
         card.RpcSetMaterial(rand);
         RpcRemoveMatFromAvailable(rand);
+
+        SetCurrentTurn();
+    }
+
+    private void SetCurrentTurn()
+    {
+        //if we are at the max number of turns, reset
+        if (_networkManager.PlayerCount - 1 == CurrentTurn && _networkManager.PlayerCount != 0)
+            CurrentTurn = 0;
+        else
+            CurrentTurn++;
+
+        Debug.Log($"It is now {CurrentTurn}'s turn");
     }
 
     [ClientRpc]

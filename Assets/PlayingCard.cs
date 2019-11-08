@@ -11,9 +11,9 @@ public class PlayingCard : NetworkBehaviour
     public GameMaster _gm;
     public BuschLiteCan _can;
 
-    public void Select()
+    public void Select(int playerTurn)
     {
-        _gm.SelectCard(this);
+        _gm.SelectCard(this, playerTurn);
     }
 
     [ClientRpc]
