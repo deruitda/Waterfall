@@ -10,7 +10,7 @@ public class CustomNetworkManager : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
-        var player = (GameObject)GameObject.Instantiate(playerPrefab, new Vector3(9.65f, 3.36f, -14.28f), Quaternion.identity);
+        var player = (GameObject)GameObject.Instantiate(playerPrefab, new Vector3(9.65f, 2f, -14.28f), Quaternion.identity);
         PlayerInfo playerInfo = player.GetComponent<PlayerInfo>();
 
         //add the player to our list and increment the count
