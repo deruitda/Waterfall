@@ -1998,6 +1998,16 @@ PrefabInstance:
       propertyPath: m_BoundingSphereOverride.y
       value: 6e-44
       objectReference: {fileID: 0}
+    - target: {fileID: 108902409688700824, guid: 6ddddf0ff6e54e2499624ff60e5f3550,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 108902409688700824, guid: 6ddddf0ff6e54e2499624ff60e5f3550,
+        type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ddddf0ff6e54e2499624ff60e5f3550, type: 3}
 --- !u!1001 &599004366
@@ -4326,7 +4336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4111058509535102, guid: 6ddddf0ff6e54e2499624ff60e5f3550, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.1933174
+      value: -0.47
       objectReference: {fileID: 0}
     - target: {fileID: 4111058509535102, guid: 6ddddf0ff6e54e2499624ff60e5f3550, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4375,7 +4385,7 @@ PrefabInstance:
     - target: {fileID: 108902409688700824, guid: 6ddddf0ff6e54e2499624ff60e5f3550,
         type: 3}
       propertyPath: m_Range
-      value: 8
+      value: 13.98155
       objectReference: {fileID: 0}
     - target: {fileID: 108902409688700824, guid: 6ddddf0ff6e54e2499624ff60e5f3550,
         type: 3}
