@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 18
-  productGUID: 00000000000000000000000000000000
+  productGUID: 0231551c12c75e0429ca2181d620f5f3
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -722,7 +722,7 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   cloudProjectId: f0939ed3-599e-4145-9194-0bc92e34bf08
   framebufferDepthMemorylessMode: 0
-  projectName: EffectsExamples
+  projectName: Waterfall (1)
   organizationId: deruitda
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
