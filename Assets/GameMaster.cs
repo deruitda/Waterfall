@@ -21,6 +21,7 @@ public class GameMaster : NetworkBehaviour
     void Start()
     {
         CopyCards(); //< TODO: Need to clone, not set equal to
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
