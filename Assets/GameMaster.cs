@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class GameMaster : NetworkBehaviour
 {
@@ -11,6 +12,7 @@ public class GameMaster : NetworkBehaviour
     public PlayingCard _currentSelectedCard;
     public BuschLiteCan _can;
     public CustomNetworkManager _networkManager;
+    public Text TurnText;
     [SyncVar]
     private int _currentTurn;
     public int CurrentTurn { get { return _currentTurn; } private set { _currentTurn = value; } }
@@ -59,8 +61,15 @@ public class GameMaster : NetworkBehaviour
             CurrentTurn = 0;
         else
             CurrentTurn++;
+        string text = $"It is now player {CurrentTurn}'s turn"; 
+        Debug.Log(text);
+        RpcSetTurnText(text);
+    }
 
-        Debug.Log($"It is now {CurrentTurn}'s turn");
+    [ClientRpc]
+    void RpcSetTurnText(string text)
+    {
+        TurnText.text = text;
     }
 
     [ClientRpc]
