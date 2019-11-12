@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -23,22 +24,33 @@ public class BuschLiteCan : NetworkBehaviour
     public void placeCard()
     {
         cardsUnderTab++;
-        Debug.Log("Cards under tab: "+cardsUnderTab);
-        
+        Debug.Log("Cards under tab: " + cardsUnderTab);
+
         if (IsCanCracked())
         {
             Debug.Log("Can cracked, bitch. Let's get a new can.");
-            ExplosionEffect explosionEffect = _explosionPrefab.GetComponent<ExplosionEffect>();
-            explosionEffect.Explode();
+            RpcCrackCan(); //blow up the can on the clients
             //Destroy(_explosionPrefab);
             NewCan();
         }
     }
 
+    [ClientRpc]
+    private void RpcCrackCan()
+    {
+        ExplodeCan();
+    }
+
+    private void ExplodeCan()
+    {
+        ExplosionEffect explosionEffect = _explosionPrefab.GetComponent<ExplosionEffect>();
+        explosionEffect.Explode();
+        Instantiate(_explosionPrefab, this.transform.position, this.transform.rotation); //init the explosion object again
+    }
+
     public void NewCan()
     {
         cardsUnderTab = 0;
-        Instantiate(_explosionPrefab, this.transform.position, this.transform.rotation);
     }
 
     private bool IsCanCracked()
@@ -49,7 +61,7 @@ public class BuschLiteCan : NetworkBehaviour
         }
 
         double chanceOfCracking = 95 * (1 - System.Math.Exp(-0.05 * (cardsUnderTab - minCardsUnderTab))) + 5;
-        double rand = Random.Range(0, 100);
+        double rand = UnityEngine.Random.Range(0, 100);
 
         // Debug.Log("Chance (" + chanceOfCracking + ") > Random (" + rand + ")?");
 

@@ -49,6 +49,7 @@ public class GameMaster : NetworkBehaviour
         _currentSelectedCard = card;
         int rand = UnityEngine.Random.Range(0, playingMats.Count - 1);
 
+        _can.placeCard();
         card.RpcSetMaterial(rand);
         RpcRemoveMatFromAvailable(rand);
 
@@ -77,7 +78,6 @@ public class GameMaster : NetworkBehaviour
     public void RpcRemoveMatFromAvailable(int index)
     {
         playingMats.RemoveAt(index);
-        _can.placeCard();
 
         if (playingMats.Count == 1)
         {
