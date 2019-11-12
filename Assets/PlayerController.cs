@@ -11,8 +11,9 @@ public class PlayerController : NetworkBehaviour
     [SerializeField]
     private float _lookSens = 5f;
 
-    public float _gazeDistance = 5f;
+    public float _gazeDistance = 10f;
     public PlayingCard _currSelectedCard;
+    public Camera _camera;
 
     // Start is called before the first frame update
     void Start()
@@ -53,11 +54,10 @@ public class PlayerController : NetworkBehaviour
 
         //if the player presses E, and hits a playing card with their gaze
         RaycastHit hit;
-        Debug.DrawRay(transform.position, transform.forward, Color.red);
+
         if (Input.GetKeyUp(KeyCode.E)
-            && Physics.Raycast(this.transform.position, transform.forward, out hit, 10f)
-            && hit.collider.gameObject.CompareTag("PlayingCard")
-            && hit.distance < _gazeDistance)
+            && Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, _gazeDistance)
+            && hit.collider.gameObject.CompareTag("PlayingCard"))
         {
             GameObject cardGO = hit.collider.gameObject;
 
