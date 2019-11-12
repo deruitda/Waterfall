@@ -1862,14 +1862,14 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 7380937119463459460, guid: d7584b2a46c02bb4f9b7b0cf88e77648,
+  m_PlayerPrefab: {fileID: 3438177539552535076, guid: d7584b2a46c02bb4f9b7b0cf88e77648,
     type: 3}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
   m_OfflineScene: 
   m_OnlineScene: 
   m_SpawnPrefabs:
-  - {fileID: 7380937119463459460, guid: d7584b2a46c02bb4f9b7b0cf88e77648, type: 3}
+  - {fileID: 3438177539552535076, guid: d7584b2a46c02bb4f9b7b0cf88e77648, type: 3}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -2432,6 +2432,39 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 599004366}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &599004373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599004367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 191
+    i1: 167
+    i2: 232
+    i3: 24
+    i4: 154
+    i5: 177
+    i6: 129
+    i7: 132
+    i8: 59
+    i9: 154
+    i10: 193
+    i11: 6
+    i12: 103
+    i13: 138
+    i14: 98
+    i15: 138
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!4 &603500064 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4277886997077392, guid: 179d7f984df2d8e4fb2a3adad779b359,
