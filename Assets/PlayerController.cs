@@ -46,11 +46,9 @@ public class PlayerController : NetworkBehaviour
         _motor.SetRotation(rotation);
 
         //get vert mouse rotation (camera roatation up and down)
-        float xRot = Input.GetAxisRaw("Mouse Y");
+        float xRot = Input.GetAxisRaw("Mouse Y") * _lookSens;
 
-        Vector3 cameraRotation = new Vector3(xRot, 0f, 0f) * _lookSens;
-
-        _motor.SetCameraRotation(cameraRotation);
+        _motor.SetCameraRotation(xRot);
 
         //if the player presses E, and hits a playing card with their gaze
         RaycastHit hit;

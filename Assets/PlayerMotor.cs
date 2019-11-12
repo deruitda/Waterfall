@@ -10,7 +10,8 @@ public class PlayerMotor : MonoBehaviour
     private Vector3 _velocity = Vector3.zero;
     private Vector3 _rotation = Vector3.zero;
     private Rigidbody _rigidbody;
-    private Vector3 _cameraRot;
+    private float _cameraRotX = 0f;
+    private float _currentCameraRotX = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -28,9 +29,9 @@ public class PlayerMotor : MonoBehaviour
         _rotation = rotation;
     }
 
-    public void SetCameraRotation(Vector3 cameraRot)
+    public void SetCameraRotation(float cameraRotX)
     {
-        _cameraRot = cameraRot;
+        _cameraRotX = cameraRotX;
     }
 
     // run every physics frame
@@ -58,9 +59,15 @@ public class PlayerMotor : MonoBehaviour
         }
 
         //rotate camera up and down
-        if (_cam != null && _cameraRot != Vector3.zero)
+        if (_cam != null && _cameraRotX != 0f)
         {
-            _cam.transform.Rotate(-_cameraRot);
+            // Set our rotation and clamp it
+            _currentCameraRotX -= _cameraRotX;
+            
+            _currentCameraRotX = Mathf.Clamp(_currentCameraRotX, -45, 45);
+
+            //Apply our rotation to the transform of our camera
+            _cam.transform.localEulerAngles = new Vector3(_currentCameraRotX, 0f, 0f);
         }
     }
 }
