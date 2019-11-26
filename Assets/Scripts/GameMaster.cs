@@ -11,7 +11,7 @@ public class GameMaster : NetworkBehaviour
     public List<Material> playingMats; //< Used in the game, reset with availableMats
     public PlayingCard _currentSelectedCard;
     public BuschLiteCan _can;
-    public CustomNetworkManager _networkManager;
+    private CustomNetworkManager _networkManager;
     public Text TurnText;
     [SyncVar]
     private int _currentTurn;
@@ -22,6 +22,7 @@ public class GameMaster : NetworkBehaviour
     {
         CopyCards(); //< TODO: Need to clone, not set equal to
         Cursor.visible = false;
+        _networkManager = NetworkManager.singleton.GetComponent<CustomNetworkManager>();
     }
 
     // Update is called once per frame
