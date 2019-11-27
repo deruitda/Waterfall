@@ -2246,13 +2246,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PlayerPrefab
       value: 
-      objectReference: {fileID: 379176432432300579, guid: d7584b2a46c02bb4f9b7b0cf88e77648,
+      objectReference: {fileID: 1176987700718353164, guid: d7584b2a46c02bb4f9b7b0cf88e77648,
         type: 3}
     - target: {fileID: 4539695907977025065, guid: 36c04197ca6273e46b7ebd2e79d74c29,
         type: 3}
       propertyPath: m_SpawnPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 379176432432300579, guid: d7584b2a46c02bb4f9b7b0cf88e77648,
+      objectReference: {fileID: 1176987700718353164, guid: d7584b2a46c02bb4f9b7b0cf88e77648,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36c04197ca6273e46b7ebd2e79d74c29, type: 3}
