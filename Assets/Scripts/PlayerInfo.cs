@@ -37,6 +37,7 @@ public class PlayerInfo : NetworkBehaviour
         DisplayText.text = name;
     }
 
+    [Command]
     private void CmdSetPlayerName(string name)
     {
         NetworkManager.singleton.GetComponent<CustomNetworkManager>().RpcSetPlayerName(TurnNumber, name);
