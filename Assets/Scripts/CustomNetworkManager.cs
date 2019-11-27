@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using System.Linq;
 
 public class CustomNetworkManager : NetworkManager
 {
@@ -17,5 +18,12 @@ public class CustomNetworkManager : NetworkManager
         playerInfo.TurnNumber = PlayerCount++;
 
         NetworkServer.AddPlayerForConnection(conn, player, (short)PlayerCount);
+    }
+
+    [ClientRpc]
+    public void RpcSetPlayerName(int playerNum, string name)
+    {
+        PlayerInfo player = Players.FirstOrDefault(p => p.TurnNumber == playerNum);
+        player.ActuallySetName(name);
     }
 }
