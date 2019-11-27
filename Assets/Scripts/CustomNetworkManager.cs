@@ -12,7 +12,7 @@ public class CustomNetworkManager : NetworkManager
     {
         var player = (GameObject)GameObject.Instantiate(playerPrefab, new Vector3(9.65f, 2f, -14.28f), Quaternion.identity);
         PlayerInfo playerInfo = player.GetComponent<PlayerInfo>();
-
+        playerInfo.Name = new System.Guid().ToString();
         //add the player to our list and increment the count
         Players.Add(playerInfo);
         playerInfo.TurnNumber = PlayerCount++;
