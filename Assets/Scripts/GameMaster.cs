@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -16,6 +17,7 @@ public class GameMaster : NetworkBehaviour
     [SyncVar]
     private int _currentTurn;
     public int CurrentTurn { get { return _currentTurn; } private set { _currentTurn = value; } }
+    public List<PlayerInfo> Players = new List<PlayerInfo>();
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,7 @@ public class GameMaster : NetworkBehaviour
         CopyCards(); //< TODO: Need to clone, not set equal to
         Cursor.visible = false;
         _networkManager = NetworkManager.singleton.GetComponent<CustomNetworkManager>();
+        DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame
@@ -104,5 +107,18 @@ public class GameMaster : NetworkBehaviour
         {
             playingMats.Add(availableMats[i]);
         }
+    }
+
+    [ClientRpc]
+    public void RpcAddPlayer(PlayerInfo playerInfo)
+    {
+        Players.Add(playerInfo);
+    }
+
+    [ClientRpc]
+    public void RpcSetPlayerName(int playerNum, string name)
+    {
+        PlayerInfo player = Players.FirstOrDefault(p => p.TurnNumber == playerNum);
+        player.ActuallySetName(name);
     }
 }

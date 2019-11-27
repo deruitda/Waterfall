@@ -12,7 +12,11 @@ public class PlayerInfo : NetworkBehaviour
     public Text DisplayText;
     public InputField _yourNameInput;
     public GameObject _playerNameCanvas;
+    private GameMaster _gm;
 
+    public void Start()
+    {
+    }
 
     public void SetName()
     {
@@ -40,6 +44,7 @@ public class PlayerInfo : NetworkBehaviour
     [Command]
     private void CmdSetPlayerName(string name)
     {
-        NetworkManager.singleton.GetComponent<CustomNetworkManager>().RpcSetPlayerName(TurnNumber, name);
+        _gm = GameObject.Find("GameMaster").GetComponent<GameMaster>();
+        _gm.RpcSetPlayerName(TurnNumber, name);
     }
 }
