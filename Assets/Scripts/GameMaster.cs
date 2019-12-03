@@ -5,6 +5,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using static PlayerInfo;
+using Newtonsoft.Json;
 
 public class GameMaster : NetworkBehaviour
 {
@@ -109,16 +111,34 @@ public class GameMaster : NetworkBehaviour
         }
     }
 
-    [ClientRpc]
-    public void RpcAddPlayer(PlayerInfo playerInfo)
+    /// <summary>
+    /// send list of players to the clients
+    /// </summary>
+    [Command]
+    public void CmdSyncPlayerStates()
     {
-        Players.Add(playerInfo);
+        List<PlayerInfoStruct> playerInfoStructs = new List<PlayerInfoStruct>();
+        foreach (PlayerInfo playerInfo in Players)
+            playerInfoStructs.Add(playerInfo.Info);
+
+        string json = JsonConvert.SerializeObject(playerInfoStructs);
+        
+        Debug.Log(json);
+        RpcSyncPlayerStates(json);
     }
 
     [ClientRpc]
-    public void RpcSetPlayerName(int playerNum, string name)
+    public void RpcSyncPlayerStates(string json)
     {
-        PlayerInfo player = Players.FirstOrDefault(p => p.TurnNumber == playerNum);
-        player.ActuallySetName(name);
+        //sync up the list of players
+        Players = GameObject.FindObjectsOfType<PlayerInfo>().ToList();
+
+        List<PlayerInfoStruct> playerInfoStructs = JsonConvert.DeserializeObject<List<PlayerInfoStruct>>(json);
+        foreach (PlayerInfo player in Players)
+        {
+            PlayerInfoStruct info = playerInfoStructs.First(i => i.PlayerID == player.Info.PlayerID);
+            //send the json to the client's players
+            player.SyncState(info);
+        }
     }
 }

@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class PlayerInfo : NetworkBehaviour
 {
-    public int TurnNumber;
-    public string Name;
+    public PlayerInfoStruct Info;
+
     public Text DisplayText;
     public InputField _yourNameInput;
     public GameObject _playerNameCanvas;
@@ -16,6 +17,7 @@ public class PlayerInfo : NetworkBehaviour
 
     public void Start()
     {
+
     }
 
     public void SetName()
@@ -25,26 +27,25 @@ public class PlayerInfo : NetworkBehaviour
 
         if (!string.IsNullOrEmpty(_yourNameInput.text))
         {
-            CmdSetPlayerName(_yourNameInput.text);
             _playerNameCanvas.SetActive(false);
             _yourNameInput.text = "";
         }
     }
 
     /// <summary>
-    /// lol
+    /// sync the state of this player with what came from the server
     /// </summary>
-    /// <param name="name"></param>
-    public void ActuallySetName(string name)
+    /// <param name="json"></param>
+    public void SyncState(PlayerInfoStruct infoStruct)
     {
-        Name = name;
-        DisplayText.text = name;
+        this.Info.TurnNumber = infoStruct.TurnNumber;
+        this.Info.Name = infoStruct.Name;
     }
 
-    [Command]
-    private void CmdSetPlayerName(string name)
-    {
-        _gm = GameObject.Find("GameMaster").GetComponent<GameMaster>();
-        _gm.RpcSetPlayerName(TurnNumber, name);
+    public struct PlayerInfoStruct {
+        public int TurnNumber;
+        public string Name;
+        public string PlayerID;
     }
+
 }

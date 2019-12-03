@@ -66,6 +66,6 @@ public class PlayerController : NetworkBehaviour
     [Command]
     private void CmdSelectCard()
     {
-        _currSelectedCard.Select(GetComponent<PlayerInfo>().TurnNumber);
+        _currSelectedCard.Select(GetComponent<PlayerInfo>().Info.TurnNumber);
     }
 }
