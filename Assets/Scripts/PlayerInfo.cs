@@ -8,8 +8,13 @@ using UnityEngine.UI;
 
 public class PlayerInfo : NetworkBehaviour
 {
-    public PlayerInfoStruct Info;
 
+    [SyncVar]
+    public int TurnNumber;
+    [SyncVar]
+    public string Name;
+    [SyncVar]
+    public string PlayerID;
     public Text DisplayText;
     public InputField _yourNameInput;
     public GameObject _playerNameCanvas;
@@ -17,7 +22,7 @@ public class PlayerInfo : NetworkBehaviour
 
     public void Start()
     {
-
+        DisplayText.text = Name;
     }
 
     public void SetName()
@@ -27,25 +32,39 @@ public class PlayerInfo : NetworkBehaviour
 
         if (!string.IsNullOrEmpty(_yourNameInput.text))
         {
-            _playerNameCanvas.SetActive(false);
+            Name = _yourNameInput.text;
+            DisplayText.text = Name;
             _yourNameInput.text = "";
+            CmdNameChanged(Name);
+
+            Cursor.visible = false;
+            _playerNameCanvas.SetActive(false);
         }
+    }
+
+    [Command]
+    public void CmdNameChanged(string name)
+    {
+        this.Name = name;
+        this.DisplayText.text = name;
+        RpcNameChanged(name);
+    }
+
+    [ClientRpc]
+    public void RpcNameChanged(string name)
+    {
+        this.Name = name;
+        this.DisplayText.text = name;
     }
 
     /// <summary>
     /// sync the state of this player with what came from the server
     /// </summary>
     /// <param name="json"></param>
-    public void SyncState(PlayerInfoStruct infoStruct)
-    {
-        this.Info.TurnNumber = infoStruct.TurnNumber;
-        this.Info.Name = infoStruct.Name;
-    }
-
-    public struct PlayerInfoStruct {
-        public int TurnNumber;
-        public string Name;
-        public string PlayerID;
-    }
+    //public void SyncState(PlayerInfoStruct infoStruct)
+    //{
+    //    this.Info.TurnNumber = infoStruct.TurnNumber;
+    //    this.Info.Name = infoStruct.Name;
+    //}
 
 }

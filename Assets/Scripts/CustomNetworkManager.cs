@@ -19,16 +19,12 @@ public class CustomNetworkManager : NetworkManager
         GameMaster _gm = GameObject.Find("GameMaster").GetComponent<GameMaster>();
 
         _gm.Players.Add(playerInfo);
-        _gm.CmdSyncPlayerStates();
         NetworkServer.AddPlayerForConnection(conn, player, (short)PlayerCount);
     }
 
     private void BuildPlayer(PlayerInfo playerInfo)
     {
-        playerInfo.Info = new PlayerInfo.PlayerInfoStruct()
-        {
-            PlayerID = Guid.NewGuid().ToString(),
-            TurnNumber = PlayerCount++
-        };
+        playerInfo.PlayerID = Guid.NewGuid().ToString();
+        playerInfo.TurnNumber = PlayerCount++;
     }
 }

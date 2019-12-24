@@ -25,7 +25,6 @@ public class GameMaster : NetworkBehaviour
     void Start()
     {
         CopyCards(); //< TODO: Need to clone, not set equal to
-        Cursor.visible = false;
         _networkManager = NetworkManager.singleton.GetComponent<CustomNetworkManager>();
         DontDestroyOnLoad(this.gameObject);
     }
@@ -108,37 +107,6 @@ public class GameMaster : NetworkBehaviour
         for (int i = 0; i < availableMats.Count; i++)
         {
             playingMats.Add(availableMats[i]);
-        }
-    }
-
-    /// <summary>
-    /// send list of players to the clients
-    /// </summary>
-    [Command]
-    public void CmdSyncPlayerStates()
-    {
-        List<PlayerInfoStruct> playerInfoStructs = new List<PlayerInfoStruct>();
-        foreach (PlayerInfo playerInfo in Players)
-            playerInfoStructs.Add(playerInfo.Info);
-
-        string json = JsonConvert.SerializeObject(playerInfoStructs);
-        
-        Debug.Log(json);
-        RpcSyncPlayerStates(json);
-    }
-
-    [ClientRpc]
-    public void RpcSyncPlayerStates(string json)
-    {
-        //sync up the list of players
-        Players = GameObject.FindObjectsOfType<PlayerInfo>().ToList();
-
-        List<PlayerInfoStruct> playerInfoStructs = JsonConvert.DeserializeObject<List<PlayerInfoStruct>>(json);
-        foreach (PlayerInfo player in Players)
-        {
-            PlayerInfoStruct info = playerInfoStructs.First(i => i.PlayerID == player.Info.PlayerID);
-            //send the json to the client's players
-            player.SyncState(info);
         }
     }
 }
