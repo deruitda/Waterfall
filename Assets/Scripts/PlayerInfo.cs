@@ -17,4 +17,9 @@ public class PlayerInfo : NetworkBehaviour
     public InputField _yourNameInput;
     public GameObject _playerNameCanvas;
     private GameMaster _gm;
+
+    private void Start()
+    {
+        DisplayText.text = $"Idiot #{TurnNumber}";
+    }
 }
