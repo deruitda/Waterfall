@@ -68,7 +68,7 @@ public class GameMaster : NetworkBehaviour
             CurrentTurn = 0;
         else
             CurrentTurn++;
-        string text = $"It is now player {CurrentTurn}'s turn"; 
+        string text = $"Player {CurrentTurn}"; 
         Debug.Log(text);
         RpcSetTurnText(text);
     }
