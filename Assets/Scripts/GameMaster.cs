@@ -55,7 +55,7 @@ public class GameMaster : NetworkBehaviour
         int rand = UnityEngine.Random.Range(0, playingMats.Count - 1);
 
         _can.placeCard();
-        card.RpcSetMaterial(rand);
+        card.SetMaterial(rand);
         RpcRemoveMatFromAvailable(rand);
 
         SetCurrentTurn();

@@ -10,11 +10,19 @@ public class PlayingCard : NetworkBehaviour
     private Material _newMat;
     public GameMaster _gm;
     public BuschLiteCan _can;
-    public PlayingCardType CardType;
+
+    [SerializeField]
+    [SyncVar]
+    private int cardTypeVal;
+
+    public PlayingCardType CardType
+    {
+        get { return (PlayingCardType)cardTypeVal; }
+    }
 
     private void Start()
     {
-        CardType = PlayingCardType.NoVal;
+        cardTypeVal = 0;
     }
 
     public void Select(int playerTurn)
@@ -22,26 +30,31 @@ public class PlayingCard : NetworkBehaviour
         _gm.SelectCard(this, playerTurn);
     }
 
-    [ClientRpc]
-    public void RpcSetMaterial(int rand)
+    public void SetMaterial(int rand)
     {
         _meshRenderer.material = _gm.GetMat(rand);
-        ParseCardValue();
+        SetCardType();
+
+        RpcSetMaterial(rand);
+    }
+
+    [ClientRpc]
+    private void RpcSetMaterial(int rand)
+    {
+        _meshRenderer.material = _gm.GetMat(rand);
     }
 
     /// <summary>
     /// Temporary function for determining the card value. 
     /// </summary>
-    private void ParseCardValue()
+    private void SetCardType()
     {
         string matName = _meshRenderer.material.name;
 
         string[] matNameChunks = matName.Split('_'); //split the name out
         string cardName = matNameChunks[matNameChunks.Length - 2]; //get the card name. Formatted as Heart02, Spade09, Diamond13 etc
 
-        int cardVal = Int32.Parse(cardName.Substring(cardName.Length - 2, 2)); //parse the numeric value
-
-        this.CardType = (PlayingCardType) cardVal;
+        this.cardTypeVal = Int32.Parse(cardName.Substring(cardName.Length - 2, 2)); //parse the numeric value       
     }
 
     public enum PlayingCardType
