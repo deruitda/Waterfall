@@ -1216,6 +1216,7 @@ MonoBehaviour:
   _meshRenderer: {fileID: 259842938}
   _gm: {fileID: 1363045139}
   _can: {fileID: 599004368}
+  CardType: -1
 --- !u!114 &259842941
 MonoBehaviour:
   m_ObjectHideFlags: 0
