@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -8,6 +10,8 @@ public class PlayingCard : NetworkBehaviour
 {
     public MeshRenderer _meshRenderer;
     private Material _newMat;
+    [SerializeField]
+    private BlackBoardTextEditor _blackBoardText;
     public GameMaster _gm;
     public BuschLiteCan _can;
 
@@ -20,6 +24,18 @@ public class PlayingCard : NetworkBehaviour
         get { return (PlayingCardType)cardTypeVal; }
     }
 
+    public string CardDescription
+    {
+        get
+        {
+            var enumType = typeof(PlayingCardType);
+            var memberInfos = enumType.GetMember(CardType.ToString());
+            var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == enumType);
+            var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            return ((DescriptionAttribute)valueAttributes[0]).Description;
+        }
+    }
+
     private void Start()
     {
         cardTypeVal = 0;
@@ -28,6 +44,7 @@ public class PlayingCard : NetworkBehaviour
     public void Select(int playerTurn)
     {
         _gm.SelectCard(this, playerTurn);
+        _blackBoardText.SetBoardText(this.CardDescription);
     }
 
     public void SetMaterial(int rand)
@@ -59,19 +76,33 @@ public class PlayingCard : NetworkBehaviour
 
     public enum PlayingCardType
     {
+        [Description("No Value")]
         NoVal = 0,
-        Ace = 1,
-        Two = 2,
-        Three = 3,
-        Four = 4,
-        Five = 5,
-        Six = 6,
-        Seven = 7,
-        Eight = 8,
-        Nine = 9,
-        Ten = 10,
-        Jack = 11,
-        Queen = 12, 
-        King = 13
+        [Description("Waterfall")]
+        Waterfall = 1,
+        [Description("You")]
+        You = 2,
+        [Description("Me")]
+        Me = 3,
+        [Description("Ladies")]
+        Ladies = 4,
+        [Description("Drive")]
+        Drive = 5,
+        [Description("Guys")]
+        Guys = 6,
+        [Description("Heaven")]
+        Heaven = 7,
+        [Description("Date")]
+        Date = 8,
+        [Description("Rhyme")]
+        Rhyme = 9,
+        [Description("Categories")]
+        Categories = 10,
+        [Description("Viking Master")]
+        VikingMaster = 11,
+        [Description("Question Master")]
+        QuestionMaster = 12, 
+        [Description("Rule Master")]
+        RuleMaster = 13
     }
 }
