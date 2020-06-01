@@ -52,7 +52,9 @@ public class PlayerController : NetworkBehaviour
 
         //if the player presses E, and hits a playing card with their gaze
         RaycastHit hit;
-
+        Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, _gazeDistance);
+        if (Input.GetKeyUp(KeyCode.E))
+            Debug.LogWarning(hit.collider.gameObject.tag);
         if (Input.GetKeyUp(KeyCode.E)
             && Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, _gazeDistance)
             && hit.collider.gameObject.CompareTag("PlayingCard"))
@@ -60,6 +62,15 @@ public class PlayerController : NetworkBehaviour
             GameObject cardGO = hit.collider.gameObject;
 
             CmdSelectCard();
+        }
+
+        if (Input.GetKeyUp(KeyCode.E)
+            && Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, _gazeDistance)
+            && hit.collider.gameObject.CompareTag("SlidingDoor"))
+        {
+            GameObject doorGO = hit.collider.gameObject;
+
+            doorGO.GetComponentInParent<SlidingDoor>().CmdToggleDoor();
         }
     }
 

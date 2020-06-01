@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Shootable
   - PlayingCard
+  - SlidingDoor
   layers:
   - Default
   - TransparentFX
